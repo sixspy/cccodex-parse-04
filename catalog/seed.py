@@ -11,4 +11,6 @@ def ensure_seed():
     if ParseJob.objects.count():
         return
     for title, code, status, uri in SEEDS:
-        ParseJob.objects.create(title=title, code=code, status=status, source_uri=uri)
+        job = ParseJob.objects.create(title=title, code=code, status=status, source_uri=uri)
+        job.source_rows = 12 + (job.id * 2) % 9
+        job.save(update_fields=["source_rows"])

@@ -1,0 +1,19 @@
+{% if summary %}
+<section class="quota-bar" aria-label="每日解析额度">
+  <div class="qbar-head">
+    <strong>今日额度</strong>
+    <span class="qbar-day mono">{{ summary.day|date:"Y-m-d" }}</span>
+    <span class="qbar-policy">超额处理：<span class="qbar-policy-name">{{ summary.policy_label }}</span></span>
+  </div>
+  <div class="qbar-track" role="progressbar" aria-valuemin="0" aria-valuemax="{{ summary.quota }}" aria-valuenow="{{ summary.used }}">
+    <div class="qbar-fill" style="width: {{ summary.pct }}%"></div>
+  </div>
+  <div class="qbar-facts">
+    <span class="qbar-fact">额度 <b class="quota-value">{{ summary.quota }}</b></span>
+    <span class="qbar-fact">今日已析 <b class="used-value">{{ summary.used }}</b></span>
+    <span class="qbar-fact">剩余 <b>{{ summary.remaining }}</b></span>
+    <span class="qbar-fact">候补数 <b class="candidate-count">{{ summary.pending_candidates }}</b></span>
+    <span class="qbar-fact qbar-pct">已用 {{ summary.pct }}%</span>
+  </div>
+</section>
+{% endif %}

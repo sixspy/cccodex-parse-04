@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}额度列表 · {{ lab }}{% endblock %}
+{% block content %}
+<h1>每日解析额度</h1>
+<p class="lede">额度扣减记在后台，结算日取后台时钟。本日超额处理只能定一种：多出来的行进次日候补匣，或当场判失败并写额度已满。</p>
+{% include "_quota_bar.html" %}
+
+{% if error %}<p class="err err-strong">{{ error }}</p>{% endif %}
+{% if notice %}<p class="notice">{{ notice }}</p>{% endif %}
+
+<section class="policy-card">
+  <h2 class="sec-title">超额策略</h2>
+  <form method="post" action="/quota/set/" class="policy-form">
+    {% csrf_token %}
+    <label>今日额度
+      <input type="number" name="quota" min="0" value="{{ summary.quota }}" />
+    </label>
+    <label>超额处理
+      <select name="policy">
+        <option value="candidate" {% if summary.policy == "candidate" %}selected{% endif %}>候补匣（多出来的行进次日候补匣）</option>
+        <option value="fail" {% if summary.policy == "fail" %}selected{% endif %}>当场失败（写额度已满）</option>
+      </select>
+    </label>
+    <button type="submit">定下本日策略</button>
+  </form>
+  <p class="hint">本日超额策略只能定一种，定下后不可更改；额度可调整但不低于今日已解析行数。</p>
+</section>
+
+<table class="grid quota-table">
+  <thead>
+    <tr><th>结算日</th><th>额度</th><th>今日已析</th><th>剩余</th><th>候补数</th><th>处理名</th></tr>
+  </thead>
+  <tbody>
+  {% for e in entries %}
+    <tr>
+      <td class="mono">{{ e.day|date:"Y-m-d" }}</td>
+      <td class="quota-cell">额度 {{ e.quota }}</td>
+      <td class="used-cell">今日已析 {{ e.used }}</td>
+      <td>{{ e.remaining }}</td>
+      <td class="cand-cell">候补数 {{ e.candidates }}</td>
+      <td>{{ e.policy_label }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr class="quota-foot">
+      <td>合计</td>
+      <td>额度 {{ totals.quota }}</td>
+      <td>今日已析 {{ totals.used }}</td>
+      <td></td>
+      <td>候补数 {{ totals.candidates }}</td>
+      <td>{{ summary.policy_label }}</td>
+    </tr>
+  </tfoot>
+</table>
+<p class="quota-footline">底栏读数：额度 {{ totals.quota }} · 今日已析 {{ totals.used }} · 候补数 {{ totals.candidates }} · 处理名 {{ summary.policy_label }}</p>
+{% endblock %}

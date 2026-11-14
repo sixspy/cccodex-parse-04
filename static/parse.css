@@ -40,3 +40,69 @@ button.secondary { background: transparent; color: var(--accent); }
 .meta dt { font-size: .75rem; color: #7a7163; } .meta dd { margin: .15rem 0 0; }
 .actions { display: flex; gap: .8rem; margin-top: 1.5rem; }
 a { color: var(--accent); }
+
+/* 顶部导航 */
+.nav { display: inline-flex; gap: 1rem; margin-right: 1.1rem; font-family: "IBM Plex Sans", sans-serif; }
+.nav a { text-decoration: none; border-bottom: 1px solid transparent; }
+.nav a:hover { border-bottom-color: var(--accent); }
+
+/* 额度条 */
+.quota-bar {
+  margin: 1.1rem 0 1.4rem; padding: .9rem 1.1rem;
+  background: #fffdf8; border: 1px solid var(--line);
+}
+.qbar-head { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; align-items: baseline; font-family: "IBM Plex Sans", sans-serif; }
+.qbar-day { color: #7a7163; font-size: .85rem; }
+.qbar-policy { margin-left: auto; font-size: .9rem; }
+.qbar-policy-name { color: var(--accent); font-weight: 600; }
+.qbar-track { height: 10px; margin: .7rem 0 .6rem; background: var(--chip); border: 1px solid var(--line); }
+.qbar-fill { height: 100%; background: var(--accent); transition: width .25s ease; }
+.qbar-facts { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; font-family: "IBM Plex Sans", sans-serif; font-size: .9rem; }
+.qbar-fact b { font-family: "IBM Plex Mono", Consolas, monospace; }
+.qbar-pct { color: #7a7163; }
+
+/* 详情：横向读盘 + 右侧旁注 */
+.detail-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.6rem; align-items: start; }
+.sec-title { font-size: 1.05rem; margin: 1.1rem 0 .6rem; letter-spacing: .04em; }
+.meta-row {
+  display: flex; flex-wrap: nowrap; gap: .55rem;
+  overflow-x: auto; padding-bottom: .5rem;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.meta-row > div {
+  flex: 0 0 auto; min-width: 104px; padding: .5rem .7rem;
+  border: 1px solid var(--line); background: #fffdf8;
+}
+.meta-row dt { font-size: .72rem; color: #7a7163; }
+.meta-row dd { margin: .2rem 0 0; white-space: nowrap; }
+.detail-aside { border-left: 1px solid var(--line); padding-left: 1.1rem; }
+.aside-block { margin-bottom: 1.2rem; }
+.aside-block h3 { font-size: .9rem; margin: 0 0 .5rem; color: #5c5346; }
+.candidate-list { list-style: none; margin: 0; padding: 0; font-family: "IBM Plex Sans", sans-serif; font-size: .85rem; }
+.candidate-item { display: flex; flex-wrap: wrap; gap: .3rem .5rem; align-items: center; padding: .45rem 0; border-bottom: 1px dashed var(--line); }
+.cand-rank { font-weight: 600; }
+.cand-days { color: #7a7163; font-size: .78rem; }
+.hint-inline { color: #7a7163; font-size: .78rem; }
+.event-list { list-style: none; margin: 0; padding: 0; font-family: "IBM Plex Sans", sans-serif; font-size: .82rem; }
+.event-item { display: flex; flex-direction: column; gap: .1rem; padding: .4rem 0; border-bottom: 1px dashed var(--line); }
+.event-kind { color: var(--accent); font-size: .75rem; }
+.event-msg { color: #4a4237; }
+.event-day { color: #9a917f; font-size: .72rem; }
+
+/* 额度列表 */
+.policy-card { margin: 1rem 0 1.4rem; padding: 1rem 1.1rem; background: #fffdf8; border: 1px solid var(--line); }
+.policy-form { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; }
+.policy-form label { margin: 0; min-width: 220px; }
+.policy-form select, .policy-form input { margin-top: .35rem; padding: .5rem .6rem; border: 1px solid var(--line); background: #fff; width: 100%; font-family: "IBM Plex Sans", sans-serif; }
+.policy-form button { margin-top: 0; }
+.quota-table tfoot td { padding: .7rem .8rem; border-top: 2px solid var(--line); font-weight: 600; background: #f7f1e6; font-family: "IBM Plex Sans", sans-serif; }
+.quota-footline { margin-top: .7rem; font-family: "IBM Plex Mono", Consolas, monospace; font-size: .88rem; color: #4a4237; }
+.notice { font-family: "IBM Plex Sans", sans-serif; padding: .6rem .8rem; margin: .8rem 0; background: #f1ead9; border: 1px solid var(--line); color: #4a4237; }
+.err-strong { padding: .6rem .8rem; background: #f6e4e4; border: 1px solid #c98a8a; font-weight: 600; }
+button.small { margin: 0; padding: .2rem .55rem; font-size: .78rem; }
+
+@media (max-width: 760px) {
+  .detail-grid { grid-template-columns: 1fr; }
+  .detail-aside { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; padding-top: .8rem; }
+}
+
